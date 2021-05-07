@@ -11,5 +11,9 @@ export default {
     url: process.env.HOSPITAL_URL,
     acmeCode: _.toNumber(process.env.HOSPITAL_ACME_CODE),
     instanceCode: _.toNumber(process.env.HOSPITAL_INSTANCE_CODE)
+  },
+  receiver: {
+    emailAddress: process.env.RECEIVER_EMAIL_ADDRESS,
+    emailPassword: process.env.RECEIVER_EMAIL_PASSWORD
   }
 };

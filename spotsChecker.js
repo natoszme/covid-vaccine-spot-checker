@@ -3,6 +3,7 @@ import moment from "moment";
 import request from "request-promise";
 import Promise from "bluebird";
 import config from "./config";
+import sendMail from "./mailSender";
 
 const _post = (path, headers, body, extraOptions) => {
   const { url } = config.hospital;
@@ -64,4 +65,5 @@ export default () =>
   .tap(spots => console.log("Spots found:", spots))
   .then(monthsWithSpots => !_.isEmpty(monthsWithSpots))
   .tap(console.log)
+  .then(thereAreVaccines => thereAreVaccines && sendMail())
   .catch(console.log);
