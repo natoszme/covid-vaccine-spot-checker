@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "now": "node index.js" 
+    "now": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.7.2",
+    "dotenv": "^9.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "request": "^2.88.2",
