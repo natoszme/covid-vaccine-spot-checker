@@ -15,13 +15,13 @@ const _post = (path, headers, body, extraOptions) => {
   return request.post(options).promise();
 }
 
-
 const getToken = () => {
   const { documentNumber, password } = config.patient;
   
   return _post("login/login", {}, { documento: documentNumber, password }, { resolveWithFullResponse: true })
   .get("headers")
-  .get("authorization");
+  .get("authorization")
+  .tap(token => { if (!token) throw new Error("Token missing") });
 }
 
 const getCalendar = (Authorization, month) => {
