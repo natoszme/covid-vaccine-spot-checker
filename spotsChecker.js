@@ -1,11 +1,11 @@
-const _ = require("lodash");
-const moment = require("moment");
-const request = require("request-promise");
-const Promise = require("bluebird");
-const { patient, hospital } = require("./config");
+import _ from "lodash";
+import moment from "moment";
+import request from "request-promise";
+import Promise from "bluebird";
+import config from "./config";
 
 const _post = (path, headers, body, extraOptions) => {
-  const { url } = hospital;
+  const { url } = config.hospital;
   const options = {
     url: `${url}/${path}`,
     json: body,
@@ -17,7 +17,7 @@ const _post = (path, headers, body, extraOptions) => {
 
 
 const getToken = () => {
-  const { documentNumber, password } = patient;
+  const { documentNumber, password } = config.patient;
   
   return _post("login/login", {}, { documento: documentNumber, password }, { resolveWithFullResponse: true })
   .get("headers")
@@ -25,8 +25,8 @@ const getToken = () => {
 }
 
 const getCalendar = (Authorization, month) => {
-  const { associateId, associateNumber } = patient;
-  const { acmeCode, instanceCode } = hospital;
+  const { associateId, associateNumber } = config.patient;
+  const { acmeCode, instanceCode } = config.hospital;
 
   const body = {
     "codAcme": acmeCode,
@@ -58,7 +58,7 @@ const getCalendarsToCheck = token => {
   .then(_.flatten);
 }
 
-module.exports = () =>
+export default () =>
   getToken()
   .then(getCalendarsToCheck)
   .tap(console.log)

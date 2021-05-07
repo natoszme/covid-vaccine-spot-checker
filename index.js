@@ -1,4 +1,4 @@
-const request = require('request');
+require("@babel/register");
 
 try {
   require('dotenv').config({ path: 'local.env' })
@@ -6,6 +6,6 @@ try {
   console.error(error);
 }
 
-const spotsChecker = require("./spotsChecker");
+const spotsChecker = require("./spotsChecker").default;
 
 spotsChecker();
