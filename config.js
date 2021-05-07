@@ -12,8 +12,13 @@ export default {
     acmeCode: _.toNumber(process.env.HOSPITAL_ACME_CODE),
     instanceCode: _.toNumber(process.env.HOSPITAL_INSTANCE_CODE)
   },
-  receiver: {
-    emailAddress: process.env.RECEIVER_EMAIL_ADDRESS,
-    emailPassword: process.env.RECEIVER_EMAIL_PASSWORD
+  notification: {
+    sender: {
+      emailAddress: process.env.SENDER_EMAIL_ADDRESS,
+      emailPassword: process.env.SENDER_EMAIL_PASSWORD  
+    },
+    receiver: {
+      emailAddress: process.env.RECEIVER_EMAIL_ADDRESS
+    }
   }
 };
