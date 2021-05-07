@@ -2,10 +2,12 @@ const _ = require("lodash");
 const moment = require("moment");
 const request = require("request-promise");
 const Promise = require("bluebird");
+const { patient, hospital } = require("./config");
 
 const _post = (path, headers, body, extraOptions) => {
+  const { url } = hospital;
   const options = {
-    url: `https://www.hospitalaleman.com/haportal/${path}`,
+    url: `${url}/${path}`,
     json: body,
     headers,
     ...extraOptions
@@ -13,22 +15,29 @@ const _post = (path, headers, body, extraOptions) => {
   return request.post(options).promise();
 }
 
-const getToken = () =>
-  _post("login/login", {}, { documento: "14418659", password: "arge02" }, { resolveWithFullResponse: true })
+
+const getToken = () => {
+  const { documentNumber, password } = patient;
+  
+  return _post("login/login", {}, { documento: documentNumber, password }, { resolveWithFullResponse: true })
   .get("headers")
   .get("authorization");
+}
 
 const getCalendar = (Authorization, month) => {
+  const { associateId, associateNumber } = patient;
+  const { acmeCode, instanceCode } = hospital;
+
   const body = {
-    "codAcme": 38814,
-    "codInstancia": 78064,
+    "codAcme": acmeCode,
+    "codInstancia": instanceCode,
     "agendaId": null,
     "duracion": null,
     "desde": `01${month}2021`,
-    "paciente": 155696,
+    "paciente": associateId,
     "banda": "O",
     "tipoArea": "I",
-    "nrosoc": "23274",
+    "nrosoc": associateNumber,
     "presencial": true
   };
   
