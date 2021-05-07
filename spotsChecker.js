@@ -49,7 +49,7 @@ const getCalendar = (Authorization, month) => {
 };
 
 const getCalendarsToCheck = token => {
-  const monthsToCheckForSpot = _(4).range(12)
+  const monthsToCheckForSpot = _(4).range(11)
   .map(monthNumber => moment().month(monthNumber).format("MM"))
   .value();
 
@@ -61,6 +61,7 @@ const getCalendarsToCheck = token => {
 export default () =>
   getToken()
   .then(getCalendarsToCheck)
-  .tap(console.log)
+  .tap(spots => console.log("Spots found:", spots))
   .then(monthsWithSpots => !_.isEmpty(monthsWithSpots))
-  .tap(console.log);
+  .tap(console.log)
+  .catch(console.log);
