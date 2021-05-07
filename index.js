@@ -18,9 +18,8 @@ const getToken = () =>
   .get("headers")
   .get("authorization");
 
-  
-  const getCalendar = (Authorization, month) => {
-    const body = {
+const getCalendar = (Authorization, month) => {
+  const body = {
     "codAcme": 38814,
     "codInstancia": 78064,
     "agendaId": null,
@@ -36,7 +35,8 @@ const getToken = () =>
   return _post("turnos/calendario", { Authorization }, body)
   .get("dias")
   .then(days => ({ month, days }))
-  .catch(console.log);
+  .tapCatch(console.log)
+  .catchReturn({ month, days: [] });
 };
 
 const getCalendarsToCheck = token => {
