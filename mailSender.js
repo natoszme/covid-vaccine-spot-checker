@@ -2,7 +2,7 @@ import config from "./config";
 import nodemailer from "nodemailer-promise";
 
 export default () => {
-  const { sender: { emailAddress, emailPassword }, receiver: { emailAddress: receiverAddress } } = config.notification;
+  const { sender: { emailAddress, emailPassword }, receiver: { emailAddresses } } = config.notification;
   const sendEmail = nodemailer.config({
     service: "hotmail",
     auth: {
@@ -13,7 +13,7 @@ export default () => {
 
   var message = {
     from: emailAddress,
-    to: receiverAddress,
+    to: emailAddresses,
     subject: '[COVID-19] Turnos de vacunación disponibles en el HA',
     text: 'Hay turnos disponibles. Apurate!\n\nNato'
   };

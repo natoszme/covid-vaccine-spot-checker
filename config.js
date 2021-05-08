@@ -18,7 +18,7 @@ export default {
       emailPassword: process.env.SENDER_EMAIL_PASSWORD  
     },
     receiver: {
-      emailAddress: process.env.RECEIVER_EMAIL_ADDRESS
+      emailAddresses: process.env.RECEIVER_EMAIL_ADDRESSES
     }
   }
 };
