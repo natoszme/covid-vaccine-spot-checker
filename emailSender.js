@@ -20,10 +20,10 @@ const sendOneEmail = () => {
     text: 'Hay turnos disponibles. Apurate!\n\nNato'
   };
 
-  return sendEmail(message)
+  return Promise.resolve(sendEmail(message))
   .then(console.log)
-  .catch(console.log);
+  .catch(console.log)
+  .delay(10000);
 }
 
-export default () =>
-  Promise.map(_.times(3), sendOneEmail, { concurrency: 1 });
+export default () => Promise.map(_.times(3), sendOneEmail, { concurrency: 1 });
