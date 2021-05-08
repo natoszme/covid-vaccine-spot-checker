@@ -65,5 +65,5 @@ export default () =>
   .tap(spots => console.log("Spots found:", spots))
   .then(monthsWithSpots => !_.isEmpty(monthsWithSpots))
   .tap(console.log)
-  .then(thereAreVaccines => thereAreVaccines && sendMail())
+  .tap(thereAreVaccines => thereAreVaccines && sendMail())
   .catch(console.log);

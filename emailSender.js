@@ -4,7 +4,7 @@ import config from "./config";
 import nodemailer from "nodemailer-promise";
 
 const sendOneEmail = () => {
-  const { sender: { emailAddress, emailPassword }, receiver: { emailAddresses } } = config.notification;
+  const { sender: { emailAddress, emailPassword }, receiver: { emailAddresses }, delayInMs } = config.notification;
   const sendEmail = nodemailer.config({
     service: "hotmail",
     auth: {
@@ -23,7 +23,8 @@ const sendOneEmail = () => {
   return Promise.resolve(sendEmail(message))
   .then(console.log)
   .catch(console.log)
-  .delay(10000);
+  .delay(delayInMs);
 }
 
-export default () => Promise.map(_.times(3), sendOneEmail, { concurrency: 1 });
+const { emailsAmount } = config.notification;
+export default () => Promise.map(_.times(emailsAmount), sendOneEmail, { concurrency: 1 });

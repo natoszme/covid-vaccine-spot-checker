@@ -19,6 +19,8 @@ export default {
     },
     receiver: {
       emailAddresses: process.env.RECEIVER_EMAIL_ADDRESSES
-    }
+    },
+    delayInMs: _.toNumber(process.env.DELAY_BETWEEN_EMAILS_SECONDS) * 1000,
+    emailsAmount: _.toNumber(process.env.EMAILS_AMOUNT)
   }
 };
