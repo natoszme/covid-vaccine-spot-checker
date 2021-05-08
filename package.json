@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/node": "^7.13.13",
     "@babel/preset-env": "^7.14.1",
     "bluebird": "^3.7.2",
     "dotenv": "^9.0.0",
