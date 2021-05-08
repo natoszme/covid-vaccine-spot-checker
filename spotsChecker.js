@@ -3,7 +3,7 @@ import moment from "moment";
 import request from "request-promise";
 import Promise from "bluebird";
 import config from "./config";
-import sendMail from "./mailSender";
+import sendMail from "./emailSender";
 
 const _post = (path, headers, body, extraOptions) => {
   const { url } = config.hospital;

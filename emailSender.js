@@ -1,7 +1,9 @@
+import _ from "lodash";
+import Promise from "bluebird";
 import config from "./config";
 import nodemailer from "nodemailer-promise";
 
-export default () => {
+const sendOneEmail = () => {
   const { sender: { emailAddress, emailPassword }, receiver: { emailAddresses } } = config.notification;
   const sendEmail = nodemailer.config({
     service: "hotmail",
@@ -22,3 +24,6 @@ export default () => {
   .then(console.log)
   .catch(console.log);
 }
+
+export default () =>
+  Promise.map(_.times(3), sendOneEmail, { concurrency: 1 });
